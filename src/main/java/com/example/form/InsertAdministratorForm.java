@@ -1,5 +1,7 @@
 package com.example.form;
 
+import com.example.validator.UniqueMailAddress;
+
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -18,6 +20,7 @@ public class InsertAdministratorForm {
   /** メールアドレス */
   @Size(min = 1, max = 48, message = "Eメールは1文字以上48文字以内で入力してください")
   @Email(message = "Eメールの形式が不正です")
+  @UniqueMailAddress
   private String mailAddress;
 
   /** パスワード */
