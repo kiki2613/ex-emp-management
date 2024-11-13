@@ -39,4 +39,14 @@ public class AdministratorService {
   public Administrator login(String mailAddress, String password) {
     return administratorRepository.findByMailAddressAndPassword(mailAddress, password);
   }
+
+  /**
+   * 重複したメールアドレスを検索する業務処理を行う.
+   * 
+   * @param mailAddress フォームに入力されたメールアドレス
+   * @return 重複したメールアドレスの有無
+   */
+  public boolean isMailAddressRegistered(String mailAddress) {
+    return administratorRepository.findByMailAddress(mailAddress) != null;
+  }
 }
