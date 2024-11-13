@@ -77,4 +77,25 @@ public class AdministratorRepository {
     return administratorList.get(0);
 
   }
+
+  /**
+   * 重複したメールアドレスを検索する.
+   * 
+   * @param mailAddress フォームに入力されたメールアドレス
+   * @return 入力されたメールアドレスと同じメールアドレスの管理者
+   */
+  public List<Administrator> findByMailAddress(String mailAddress) {
+    String sql = "SELECT id,name,mail_address,password FROM " + TABLE_NAME + " WHERE mail_address = :mailAddress";
+
+    SqlParameterSource param = new MapSqlParameterSource()
+        .addValue("mailAddress", mailAddress);
+
+    List<Administrator> administratorList = template.query(sql, param, ADMINISTRATOR_ROW_MAPPER);
+
+    if (administratorList.size() == 0) {
+      return null;
+    }
+
+    return administratorList;
+  }
 }
